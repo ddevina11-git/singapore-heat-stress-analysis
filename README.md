@@ -202,5 +202,13 @@ The combination of high temperature + high humidity + low wind + infrequent rain
 - PostgreSQL installed locally
 - Power BI Desktop (for dashboard)
 
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/singapore-heat-stress-analysis.git
+cd singapore-heat-stress-analysis
+
 # Install dependencies
 pip install -r requirements.txt
+

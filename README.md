@@ -35,40 +35,68 @@ Singapore's highly urbanized environment creates an urban heat island effect, wh
 
 ## Architecture Diagram
 
-```mermaid
-flowchart TB
-    subgraph Source["1. Data Source"]
-        A[("data.gov.sg API<br/>NEA Air Temperature")]
-    end
+================================================================================
+                    SINGAPORE HEAT STRESS ANALYSIS - ETL PIPELINE
+================================================================================
 
-    subgraph Extract["2. Extract (Python)"]
-        B["requests + for-loop<br/>92 days (Oct-Dec 2025)<br/>API key authentication"]
-    end
+┌─────────────────────┐
+│    DATA SOURCE      │
+│  data.gov.sg API    │
+│  NEA Air Temp       │
+│  JSON via REST      │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│     EXTRACT         │
+│  Python + requests  │
+│  For-loop: 92 days  │
+│  (Oct-Dec 2025)     │
+│  API key auth       │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│    TRANSFORM        │
+│  Python + Pandas    │
+│  Flatten JSON       │
+│  Clean missing      │
+│  Remove duplicates  │
+│  Validate temp      │
+│  Add date/month/hr  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│      LOAD           │
+│  PostgreSQL         │
+│  SQLAlchemy         │
+│  Table: air_temp_df │
+│  10+ columns        │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  ANALYZE & VISUALIZE│
+│  SQL Queries        │
+│  Top 10 stations    │
+│  Daily/monthly avg  │
+└──────────┬──────────┘
+           │
+           ▼
+┌─────────────────────┐
+│  Power BI Dashboard │
+│  Heat stress viz    │
+└─────────────────────┘
 
-    subgraph Transform["3. Transform (Pandas)"]
-        C["Flatten JSON → DataFrame<br/>Clean missing values<br/>Remove duplicates<br/>Validate temperature range<br/>Add date/month/hour columns"]
-    end
-
-    subgraph Load["4. Load (SQLAlchemy)"]
-        D[("PostgreSQL Database<br/>'SGWeather'") ]
-        E["Table: air_temp_df<br/>id, timestamp, station_id<br/>station_name, latitude<br/>longitude, readings<br/>date, month, hour"]
-    end
-
-    subgraph Analyze["5. Analyze & Visualize"]
-        F["SQL Analysis Queries<br/>Top 10 stations<br/>Daily/monthly averages"]
-        G["Power BI Dashboard<br/>Heat stress visualization"]
-    end
-
-    A --> B --> C --> D
-    D --> E
-    E --> F --> G
-
-    subgraph Automation["Future: Automation"]
-        H["Apache Airflow<br/>Daily scheduled pipeline"]
-    end
-
-    D -.-> H
-```
+================================================================================
+                    FUTURE AUTOMATION (Planned)
+================================================================================
+                    ┌─────────────────────────┐
+                    │  Apache Airflow          │
+                    │  Daily scheduled ETL     │
+                    │  Automatic data refresh  │
+                    └─────────────────────────┘
 
 ## ETL Process
 

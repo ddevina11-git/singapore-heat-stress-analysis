@@ -166,6 +166,27 @@ erDiagram
 | longitude | REAL | Geographic longitude |
 | readings | REAL | Temperature in Celsius |
 
+### Planned Future Tables
+
+| Table | Purpose |
+|-------|---------|
+| stations_master | Lookup table for station metadata |
+| daily_aggregates | Pre-computed daily summaries |
+| heat_stress_log | Historical heat stress calculations |
+
+### Sample Query
+
+```sql
+-- Find the top 5 hottest stations in October 2025
+SELECT 
+    station_name,
+    ROUND(AVG(readings), 1) as avg_temp
+FROM air_temp_df
+WHERE month = 10
+GROUP BY station_name
+ORDER BY avg_temp DESC
+LIMIT 5;
+
 ## Key Findings
 
 ### Top 10 Hottest Locations (Oct-Dec 2025)

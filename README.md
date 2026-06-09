@@ -39,55 +39,55 @@ Singapore's highly urbanized environment creates an urban heat island effect, wh
                     SINGAPORE HEAT STRESS ANALYSIS - ETL PIPELINE
 ================================================================================
 
-┌─────────────────────┐
-│    DATA SOURCE      │
-│  data.gov.sg API    │
-│  NEA Air Temp       │
-│  JSON via REST      │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│     EXTRACT         │
-│  Python + requests  │
-│  For-loop: 92 days  │
-│  (Oct-Dec 2025)     │
-│  API key auth       │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│    TRANSFORM        │
-│  Python + Pandas    │
-│  Flatten JSON       │
-│  Clean missing      │
-│  Remove duplicates  │
-│  Validate temp      │
-│  Add date/month/hr  │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│      LOAD           │
-│  PostgreSQL         │
-│  SQLAlchemy         │
-│  Table: air_temp_df │
-│  10+ columns        │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  ANALYZE & VISUALIZE│
-│  SQL Queries        │
-│  Top 10 stations    │
-│  Daily/monthly avg  │
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│  Power BI Dashboard │
-│  Heat stress viz    │
-└─────────────────────┘
+               ┌─────────────────────┐
+               │    DATA SOURCE      │
+               │  data.gov.sg API    │
+               │  NEA Air Temp       │
+               │  JSON via REST      │
+               └──────────┬──────────┘
+                          │
+                          ▼
+                ┌─────────────────────┐
+                │     EXTRACT         │
+                │  Python + requests  │
+                │  For-loop: 92 days  │
+                │  (Oct-Dec 2025)     │
+                │  API key auth       │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                 ┌─────────────────────┐
+                 │    TRANSFORM        │
+                 │  Python + Pandas    │
+                 │  Flatten JSON       │
+                 │  Clean missing      │
+                 │  Remove duplicates  │
+                 │  Validate temp      │
+                 │  Add date/month/hr  │
+                 └──────────┬──────────┘
+                            │
+                            ▼
+                  ┌─────────────────────┐
+                  │      LOAD           │
+                  │  PostgreSQL         │
+                  │  SQLAlchemy         │
+                  │  Table: air_temp_df │
+                  │  10+ columns        │
+                  └──────────┬──────────┘
+                             │
+                             ▼
+                   ┌─────────────────────┐
+                   │  ANALYZE & VISUALIZE│
+                   │  SQL Queries        │
+                   │  Top 10 stations    │
+                   │  Daily/monthly avg  │
+                   └──────────┬──────────┘
+                              │
+                              ▼
+                    ┌─────────────────────┐
+                    │  Power BI Dashboard │
+                    │  Heat stress viz    │
+                    └─────────────────────┘
 
 ================================================================================
                     FUTURE AUTOMATION (Planned)

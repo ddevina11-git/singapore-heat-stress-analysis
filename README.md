@@ -186,7 +186,7 @@ WHERE month = 10
 GROUP BY station_name
 ORDER BY avg_temp DESC
 LIMIT 5;
-
+```
 
 ## Key Findings
 
@@ -233,4 +233,5 @@ cd singapore-heat-stress-analysis
 
 # Install dependencies
 pip install -r requirements.txt
+```
 

@@ -187,6 +187,7 @@ GROUP BY station_name
 ORDER BY avg_temp DESC
 LIMIT 5;
 
+
 ## Key Findings
 
 ### Top 10 Hottest Locations (Oct-Dec 2025)
